@@ -1,0 +1,25 @@
+2026-09-16 03:41:51,885 [INFO] desktop_companion.main: Starting Desktop Companion
+2026-09-16 03:41:52,050 [INFO] desktop_companion.image_processor: Processed character 'default' -> (72, 220)
+2026-09-16 03:41:52,112 [INFO] desktop_companion.pet: Loaded character 'default' at scale 1.00 -> 72x220
+2026-09-16 03:41:52,168 [INFO] desktop_companion.system_monitor: NVML unavailable (NVML Shared Library Not Found); GPU monitoring disabled
+2026-09-16 03:41:52,556 [ERROR] desktop_companion.notifications: Failed to initialize Windows notification listener
+Traceback (most recent call last):
+  File "C:\Projects\Arka\app\notifications.py", line 74, in run
+    listener = UserNotificationListener.get_current()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object '_winsdk_Windows_UI_Notifications_Management.UserNotificationListener' has no attribute 'get_current'
+2026-09-16 03:42:58,600 [INFO] desktop_companion.pet: Loaded character 'default' at scale 1.00 -> 72x220
+2026-09-16 03:42:58,601 [INFO] desktop_companion.pet: Loaded character 'default' at scale 1.00 -> 72x220
+2026-09-16 03:42:58,603 [INFO] desktop_companion.pet: Loaded character 'default' at scale 1.00 -> 72x220
+2026-09-16 03:42:58,604 [INFO] desktop_companion.pet: Loaded character 'default' at scale 1.00 -> 72x220
+2026-09-16 03:42:58,606 [INFO] desktop_companion.pet: Loaded character 'default' at scale 1.00 -> 72x220
+2026-09-16 03:47:28,407 [INFO] desktop_companion.main: Starting Desktop Companion
+2026-09-16 03:47:29,260 [INFO] desktop_companion.image_processor: Processed character 'default' -> (119, 220)
+2026-09-16 03:47:29,325 [INFO] desktop_companion.pet: Loaded character 'default' at scale 1.00 -> 119x220
+2026-09-16 03:47:29,353 [INFO] desktop_companion.system_monitor: NVML unavailable (NVML Shared Library Not Found); GPU monitoring disabled
+2026-09-16 03:47:29,437 [ERROR] desktop_companion.notifications: Failed to initialize Windows notification listener
+Traceback (most recent call last):
+  File "C:\Projects\Arka\app\notifications.py", line 74, in run
+    listener = UserNotificationListener.get_current()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object '_winsdk_Windows_UI_Notifications_Management.UserNotificationListener' has no attribute 'get_current'

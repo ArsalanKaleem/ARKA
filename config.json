@@ -9,8 +9,8 @@
     "monitor_index": 0
   },
   "behavior": {
-    "idle_min_seconds": 3,
-    "idle_max_seconds": 15,
+    "idle_min_seconds": 3.0,
+    "idle_max_seconds": 15.0,
     "jump_probability": 0.02,
     "sleep_probability": 0.005,
     "random_action_probability": 0.01
@@ -18,8 +18,8 @@
   "system": {
     "monitor_cpu": true,
     "monitor_gpu": true,
-    "yellow_threshold": 50,
-    "red_threshold": 80,
+    "yellow_threshold": 50.0,
+    "red_threshold": 80.0,
     "poll_interval_seconds": 2.0,
     "show_status_indicator": true
   },
