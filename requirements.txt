@@ -1,0 +1,17 @@
+# Core (required)
+PySide6>=6.6
+Pillow>=10.0
+psutil>=5.9
+screeninfo>=0.8
+
+# Optional: NVIDIA GPU monitoring. The app runs fine without it -
+# GPU status simply shows as unavailable.
+nvidia-ml-py>=12.535.108
+
+# Optional: Windows notification-center listening (Windows 10/11 only).
+# Without it, the pet still reacts to notifications triggered manually
+# via the tray menu's "Send Test Notification" action.
+winsdk>=1.0.0b10; sys_platform == "win32"
+
+# Packaging
+pyinstaller>=6.0

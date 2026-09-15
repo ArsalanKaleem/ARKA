@@ -1,0 +1,35 @@
+{
+  "pet": {
+    "character": "default",
+    "scale": 1.0,
+    "walk_speed": 2.0,
+    "animation_fps": 12,
+    "always_on_top": true,
+    "monitor_mode": "primary",
+    "monitor_index": 0
+  },
+  "behavior": {
+    "idle_min_seconds": 3,
+    "idle_max_seconds": 15,
+    "jump_probability": 0.02,
+    "sleep_probability": 0.005,
+    "random_action_probability": 0.01
+  },
+  "system": {
+    "monitor_cpu": true,
+    "monitor_gpu": true,
+    "yellow_threshold": 50,
+    "red_threshold": 80,
+    "poll_interval_seconds": 2.0,
+    "show_status_indicator": true
+  },
+  "notifications": {
+    "enabled": true,
+    "board_duration": 3.0,
+    "board_position": "above"
+  },
+  "startup": {
+    "start_with_windows": false,
+    "start_minimized": true
+  }
+}
