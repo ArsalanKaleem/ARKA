@@ -21,8 +21,8 @@ logger = utils.get_logger("behavior")
 # Minimum seconds between repeats of the same reactive state, so the pet
 # doesn't flicker between PANIC/EXCITED/NOTICE on every tick.
 _REACTION_COOLDOWN = 4.0
-_TURN_DURATION = 0.25
-_JUMP_DURATION = 0.6
+_TURN_DURATION = 0.22  # keep in sync with animation.TURN_DURATION
+_JUMP_DURATION = 0.55  # keep in sync with animation.JUMP_DURATION
 
 
 class BehaviorEngine:

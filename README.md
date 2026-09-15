@@ -51,6 +51,32 @@ to pick a PNG. A simple placeholder character is included at
 immediately — replace it (or add a new character from the tray menu)
 with your own full-body art.
 
+## How the animation actually works
+
+Earlier versions of this app only rotated/squashed the *whole* sprite,
+which reads as "wobbling," not walking. This version tears the character
+into a torso layer and two leg layers (split down the middle at the hip
+line, both sharing one pivot point) and rotates the legs in alternating
+directions each tick — the same joint-and-layer trick used by cheap 2D
+cutout rigs (Adobe Character Animator, DragonBones, paper-doll animation),
+just automated instead of hand-placed. WALK, JUMP (legs tuck), and PANIC
+(fast shuffle) all use this; other states reuse the plain static image
+since the legs aren't moving anyway.
+
+Arms are intentionally **not** cut out the same way — segmenting an arm
+from an arbitrary photo (holding a bag, hands in pockets, one hand raised)
+is unreliable and tends to produce a visibly broken cutout. Instead the
+torso gets a very small synced shear during walking to imply
+counter-swinging shoulders. If you want real arm articulation, the
+cleanest next step is pose estimation (e.g. `mediapipe`'s pose landmarker)
+to find actual shoulder/elbow/wrist points instead of the fixed-proportion
+heuristic used for the hip line — `image_processor._build_rig` is the
+one function you'd extend.
+
+SLEEP now actually lies the character down — it rotates around its base
+(feet) rather than its center, easing into the pose, with a small
+floating "Zzz" drawn above it — instead of standing upright with a tilt.
+
 ## Adding / changing a character
 
 Two ways:
@@ -171,6 +197,10 @@ desktop_companion/
 ├── assets/characters/default/character.png
 └── data/                                # config, logs, and processed-image cache (created at runtime)
 ```
+
+- Old-format cache files from a previous version of this app (without
+  a `pivot_right` entry in `meta.json`) are detected and automatically
+  reprocessed with the new leg rig — no manual cache clearing needed.
 
 ## Troubleshooting
 

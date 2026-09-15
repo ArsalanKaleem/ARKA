@@ -20,8 +20,32 @@ from . import utils
 logger = utils.get_logger("pet_window")
 
 # Extra canvas padding around the sprite so rotation/scale/jump don't clip.
-CANVAS_PADDING = 90
+CANVAS_PADDING = 120
 BOARD_HEIGHT = 46
+
+
+class SleepBubble:
+    """Small floating "Z" letters drawn near the character's head while
+    asleep - purely decorative, driven by the state's own elapsed time so
+    it loops smoothly regardless of tick rate."""
+
+    _LETTERS = "Zzz"
+
+    def paint(self, painter: QPainter, anchor_x: int, anchor_y: int, elapsed: float) -> None:
+        painter.save()
+        font = QFont("Segoe UI", 10, QFont.Weight.Bold)
+        for i, letter in enumerate(self._LETTERS):
+            cycle = (elapsed * 0.8 + i * 0.35) % 1.0
+            rise = cycle * 26.0
+            fade = 1.0 - cycle
+            size = 9 + i * 3
+            f = QFont(font)
+            f.setPointSize(size)
+            painter.setFont(f)
+            painter.setOpacity(max(0.0, fade))
+            painter.setPen(QColor(70, 70, 90, 255))
+            painter.drawText(int(anchor_x + i * 10), int(anchor_y - rise), letter)
+        painter.restore()
 
 
 class NotificationBoard:
@@ -100,6 +124,7 @@ class PetWindow(QWidget):
         self.config = config
         self.board = NotificationBoard()
         self.indicator = StatusIndicator()
+        self.sleep_bubble = SleepBubble()
         self.indicator.enabled = config["system"]["show_status_indicator"]
         self._paused = False
         self._current_frame: RenderFrame | None = None
@@ -172,17 +197,20 @@ class PetWindow(QWidget):
         painter.save()
         painter.setOpacity(max(0.0, min(1.0, transform.opacity)))
 
+        pivot_y_local = pixmap.height() if transform.pivot_at_base else pixmap.height() / 2
         cx = sprite_x + pixmap.width() / 2 + transform.offset_x
-        cy = sprite_y + pixmap.height() / 2 + transform.offset_y
+        cy = sprite_y + pivot_y_local + transform.offset_y
         painter.translate(cx, cy)
         painter.rotate(transform.rotation_deg)
         painter.scale(transform.scale_x, transform.scale_y)
-        painter.translate(-pixmap.width() / 2, -pixmap.height() / 2)
+        painter.translate(-pixmap.width() / 2, -pivot_y_local)
         painter.drawPixmap(0, 0, pixmap)
         painter.restore()
 
         self.board.paint(painter, self.width(), sprite_y)
         self.indicator.paint(painter, sprite_x, sprite_y, pixmap.width())
+        if frame.state == PetState.SLEEP:
+            self.sleep_bubble.paint(painter, int(cx), int(cy - pixmap.height() * 0.3), frame.state_elapsed)
 
     # -- interaction ---------------------------------------------------------
 

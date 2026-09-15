@@ -22,7 +22,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "character": "default",
         "scale": 1.0,
         "walk_speed": 2.0,
-        "animation_fps": 12,
+        "animation_fps": 16,
         "always_on_top": True,
         "monitor_mode": "primary",  # primary | specific_monitor | random_monitor
         "monitor_index": 0,
